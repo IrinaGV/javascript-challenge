@@ -30,8 +30,7 @@ function eventHandler()
     newtable(filtered_data);
 }
   
-  // Input fields can trigger a change event when new text is entered.
-  filterDateButton.on("click", eventHandler);
+   filterDateButton.on("click", eventHandler);
   dateInput.on("change", eventHandler);
 
 
