@@ -1,13 +1,12 @@
 var tableData = data;
 
-
+var tbody = d3.select('tbody')
 
 function newtable(data){
 
-    var tbody = d3.select('tbody')
     data.forEach((ufo) => {
+        console.log(ufo);
         var row = tbody.append("tr");
-
         Object.entries(ufo).forEach(([key, value]) => {
          var cell = row.append("td");
           cell.text(value);
@@ -16,27 +15,23 @@ function newtable(data){
       });
 }
 
-newtable(tableData)
+newtable(tableData);
 
 
-var filterDateButton = d3.select("#filter-btn");
+var filterDateButton = d3.selectAll("#filter-btn");
 var dateInput = d3.select("#datetime");
 
-
-filterDateButton.on("click", function() {
-    
-   
-    var dateToFilter = dateInput.property('value');
-    var ufoFilteredDate = tableData.filter(
-      ufo => ufo.datetime === (dateToFilter || ufo.datetime));
+function eventHandler()
+{
+    d3.event.preventDefault();
+    tbody.text("");
+    var filtered_data = tableData.filter(data => data.datetime === dateInput.property("value"));
+    console.log(filtered_data);
+    newtable(filtered_data);
+}
   
-    
-    var rows = d3.select('tbody').selectAll("tr")    
-                 .data([])                
-                 .exit()
-                 .remove();
-          
+  // Input fields can trigger a change event when new text is entered.
+  filterDateButton.on("click", eventHandler);
+  dateInput.on("change", eventHandler);
 
-    newtable(ufoFilteredDate)
 
-  });
