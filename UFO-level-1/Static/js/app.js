@@ -30,7 +30,7 @@ function eventHandler()
     newtable(filtered_data);
 }
   
-   filterDateButton.on("click", eventHandler);
+  filterDateButton.on("click", eventHandler);
   dateInput.on("change", eventHandler);
 
 
